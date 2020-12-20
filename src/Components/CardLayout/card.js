@@ -1,146 +1,99 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import InfoIcon from '@material-ui/icons/Info';
-import Card from '@material-ui/core/Card';
-import Tooltip from '@material-ui/core/Tooltip';
-import CardActions from '@material-ui/core/CardActions';
-import {
-  PieChart, Pie, Cell,
-} from 'recharts';
-
-const styles = theme => ({
-  card: {
-    width: '100%',
-    height: 400
-  },
-  header: {
-    backgroundColor: "#336278",
-    color: "#90A4AE",
-    width: "100%",
-    height: 50,
-    display: "flex",
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '12px 0px 12px 0px',
-  },
-  actions: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 200,
-    backgroundColor: '#1C4354'
-  },
-  topPanel: {
-    backgroundColor: "#336278",
-    height: 140,
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%'
-  },
-  percentBox: {
-    fontSize: "2.5em",
-    padding: "0.2em",
-    margin: "0.1em",
-    borderRadius: '4px'
-  }
-});
+import visaImg from '../../images/visa.svg';
+import passwordImg from '../../images/password.svg';
+import bankImg from '../../images/bank.svg';
+import closeImg from '../../images/close.svg';
+import loginImg from '../../images/arrow-right.svg';
+import decryptingImg from '../../images/decrypting.svg';
+import './card.css';
 
 class StatusCard extends React.Component {
-  getColorTheme = (type) => {
-    let NUM_COLOR = "#CDDC39";
-    let NUM_BG = "rgba(205,220,57,0.1)";
-    let DONUT_BG = "rgba(255,255,255,0.1)";
-    let DONUT_COLORS = [
-      NUM_COLOR,
-      'rgba(255,255,255,0.1)',
-    ];
-    switch (type) {
-      case 'success':
-        NUM_COLOR = "#CDDC39";
-        NUM_BG = "rgba(205,220,57,0.1)";
-        break;
-      case 'error':
-        NUM_COLOR = "#f44336";
-        NUM_BG = "rgba(244,67,54,0.1)";
-        break;
-      case 'warning':
-        NUM_COLOR = "#FFCA28";
-        NUM_BG = "rgba(255,202,42,0.1)";
-        break;
-      default:
-        break;
-    }
-    DONUT_COLORS = [
-      NUM_COLOR,
-      DONUT_BG,
-    ];
-    return { DONUT_COLORS, NUM_COLOR, NUM_BG };
-
+  state = {
+    showPINInput: false,
+    password: ''
   }
+
+  showPIN = () => {
+    this.setState({
+      showPINInput: true
+    });
+  }
+
+  hidePIN = () => {
+    this.setState({
+      showPINInput: false
+    });
+  }
+
+  enterPassword = (e) => {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      this.props.retrieveCardData(this.state.password)
+    }
+  }
+
   render() {
-    let { classes, percentage, type, title, progressInfo, duration } = this.props;
-    if (type === "error") {
-      duration = 'Unable';
-    };
-    const { NUM_COLOR, DONUT_COLORS, NUM_BG } = this.getColorTheme(type);
-    const data = [
-      {
-        name: 'Completed',
-        value: percentage
-      },
-      {
-        name: 'Remaining',
-        value: (100 - percentage)
-      }
-    ];
+    let { holderName, cardNumber, validThru, cvv, retrieveCardData, decrypting, isValidPassword } = this.props;
+    const { showPINInput, password } = this.state;
 
     return (
-        <Card className={classes.card}>
-          <span className={classes.header}>
-            {title}
-            <Tooltip title={progressInfo} aria-label="add" placement="right-start">
-              <InfoIcon style={{ marginLeft: '5px'}} fontSize="small"/>
-            </Tooltip>
-          </span>
-          <div className={classes.topPanel}>
-            <PieChart width={220} height={200} onMouseEnter={this.onPieEnter}>
-              <Pie
-                data={data}
-                cx={105}
-                cy={60}
-                startAngle={210}
-                endAngle={-30}
-                innerRadius={41}
-                outerRadius={59}
-                fill="#8884d8"
-                paddingAngle={0}
-                stroke={0}
-                dataKey="value"
-              >
-                {data.map((_, index) =>
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={DONUT_COLORS[index % DONUT_COLORS.length]} />)}
-              </Pie>
-            </PieChart>
+      <div className="card">
+
+        {/* Unlock Overlay */}
+        {!showPINInput && !isValidPassword && <div className="lock-overlay">
+          <div className="outer-most ring">
+            <div className="outer ring">
+              <div className="inner ring">
+                <button onClick={this.showPIN}>
+                  <img src={passwordImg} />
+                </button>
+              </div>
+            </div>
           </div>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <div style={{ fontSize: "0.85em", color: "#999", marginBottom: '1em' }}>
-              Overall Job Progress
+        </div>}
+        {showPINInput && !isValidPassword && <div className="pin-overlay">
+          <div className="password-input">
+          {!decrypting && <div onClick={this.hidePIN} className="img-container">
+              <img src={closeImg} />
+            </div>}
+            {decrypting && <img className="decrypting-loader" src={decryptingImg} />}
+            {!decrypting && <input type="password" value={password} onKeyDown={ (e) => this.handleEnter(e) } onChange={ e => this.enterPassword(e) }/>}
+            {!decrypting && <div className="img-container">
+              <img src={loginImg} onClick={() => retrieveCardData(password)} />
+            </div>}
+          </div>
+        </div>}
+
+        <div className="card-body">
+          <div className="card-two-col top-header">
+            <div className="bank-name">
+              <img src={bankImg} />
+              <span>AXIS BANK</span>
+            </div>
+            <img className="card-logo" src={visaImg} />
+          </div>
+          <p className="card-numer">{cardNumber}</p>
+          <div>
+            <p className="card-info">{holderName}</p>
+          </div>
+          <div className="card-two-col">
+            <div>
+              <span className="card-label">Expires</span>
+              <p className="card-info">{validThru}</p>
             </div>
             <div>
-              <span className={classes.percentBox} style={{ color: NUM_COLOR, backgroundColor: NUM_BG }} >
-                {percentage}
-              </span>
-              <span style={{ fontSize: "0.7em", color: "#777" }} >
-                {`${duration} to finish`}
-              </span>
+              <span className="card-label">CVV</span>
+              <p className="card-info">{cvv}</p>
             </div>
-          </CardActions>
-        </Card>
+          </div>
+        </div>
+      </div>
     );
   }
 }
@@ -152,4 +105,4 @@ StatusCard.propTypes = {
   type: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(StatusCard);
+export default StatusCard;
