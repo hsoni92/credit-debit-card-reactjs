@@ -1,95 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import visaImg from '../../images/visa.svg';
-import passwordImg from '../../images/password.svg';
 import bankImg from '../../images/bank.svg';
-import closeImg from '../../images/close.svg';
-import loginImg from '../../images/arrow-right.svg';
-import decryptingImg from '../../images/decrypting.svg';
 import './card.css';
 
 class StatusCard extends React.Component {
   state = {
-    showPINInput: false,
-    password: ''
+    showDetails: false,
   }
 
-  showPIN = () => {
+  revealDetailsToggle = (e) => {
+    const showDetails = this.state.showDetails;
     this.setState({
-      showPINInput: true
+      showDetails: !showDetails
     });
   }
 
-  hidePIN = () => {
-    this.setState({
-      showPINInput: false
-    });
+  maskDetails = (input) => {
+    if (!this.state.showDetails) {
+      return input.replace(/[0-9]/g, '•');
+    } else {
+      return input;
+    }
   }
 
-  enterPassword = (e) => {
-    this.setState({
-      password: e.target.value
-    });
-  }
-
-  handleEnter = (e) => {
-    if (e.key === 'Enter') {
-      this.props.retrieveCardData(this.state.password)
+  maskCardNumber = (input) => {
+    if (!this.state.showDetails) {
+      const octets = input.split(' ');
+      const semioctet = `${octets[0]} ${octets[1]} ${octets[2]} `; 
+      return `${semioctet.replace(/[0-9]/g, '•')} ${octets[3]}`;
+    } else {
+      return input;
     }
   }
 
   render() {
-    let { holderName, cardNumber, validThru, cvv, retrieveCardData, decrypting, isValidPassword } = this.props;
-    const { showPINInput, password } = this.state;
+    let { holderName, cardNumber, validThru, cvv } = this.props;
 
     return (
       <div className="card">
-
-        {/* Unlock Overlay */}
-        {!showPINInput && !isValidPassword && <div className="lock-overlay">
-          <div className="outer-most ring">
-            <div className="outer ring">
-              <div className="inner ring">
-                <button onClick={this.showPIN}>
-                  <img src={passwordImg} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>}
-        {showPINInput && !isValidPassword && <div className="pin-overlay">
-          <div className="password-input">
-          {!decrypting && <div onClick={this.hidePIN} className="img-container">
-              <img src={closeImg} />
-            </div>}
-            {decrypting && <img className="decrypting-loader" src={decryptingImg} />}
-            {!decrypting && <input type="password" value={password} onKeyDown={ (e) => this.handleEnter(e) } onChange={ e => this.enterPassword(e) }/>}
-            {!decrypting && <div className="img-container">
-              <img src={loginImg} onClick={() => retrieveCardData(password)} />
-            </div>}
-          </div>
-        </div>}
-
         <div className="card-body">
           <div className="card-two-col top-header">
             <div className="bank-name">
               <img src={bankImg} />
-              <span>AXIS BANK</span>
+              <span>Lorem Ipsum</span><span>Bank</span>
             </div>
             <img className="card-logo" src={visaImg} />
           </div>
-          <p className="card-numer">{cardNumber}</p>
+          <p className="card-numer">{ this.maskCardNumber(cardNumber) }</p>
           <div>
-            <p className="card-info">{holderName}</p>
+            <p className="card-info">{ holderName }</p>
           </div>
           <div className="card-two-col">
             <div>
               <span className="card-label">Expires</span>
-              <p className="card-info">{validThru}</p>
+              <p className="card-info">{ this.maskDetails(validThru) }</p>
             </div>
             <div>
               <span className="card-label">CVV</span>
-              <p className="card-info">{cvv}</p>
+              <p className="card-info">{ this.maskDetails(cvv) }</p>
+            </div>
+            <div>
+              <div onClick={ (e) => this.revealDetailsToggle(e) } className={ `btn ${this.state.showDetails ? 'active' : '' }` }>
+                <div class="inner-wrapper">
+                  <i class="material-icons-round">{ this.state.showDetails ? 'lock' : 'lock_open' }</i>
+                </div>
+              </div>
             </div>
           </div>
         </div>

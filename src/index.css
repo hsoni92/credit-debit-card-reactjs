@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Material+Icons+Round');
+
 body {
   display: flex;
   justify-content: center;
@@ -5,7 +7,7 @@ body {
   display: -webkit-flex;
   -webkit-align-items: center;
   -webkit-justify-content: center;
-  background-color: #efefef;
+  background-color: #F1F3F6;
   flex-direction: column;
   -webkit-flex-direction: column;
   overflow: hidden;

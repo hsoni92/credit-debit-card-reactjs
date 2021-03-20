@@ -4,7 +4,7 @@
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #fff;
+    color: #323439;
 }
 
 .card {
@@ -22,8 +22,9 @@
     height: 230px;
     padding: 30px;
     box-shadow: 1px 1px #aaa3a3;
-    background-color: #880E4F;
-    border-radius: 8px;
+    background: #f1f3f6;
+    border-radius: 20px;
+    box-shadow: inset 0 0 15px rgba(55, 84, 170, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(55, 84, 170, 0.15), -7px -7px 20px white, inset 0px 0px 4px rgba(255, 255, 255, 0.2);
 }
 
 .card-two-col {
@@ -44,6 +45,15 @@
     font-weight: bold;
 }
 
+.bank-name span {
+    color: #444;
+}
+
+.bank-name span:nth-child(3) {
+    font-weight: lighter;
+    padding-left: 5px;
+}
+
 .bank-name img {
     height: 25px;
     margin-right: 5px;
@@ -59,7 +69,6 @@
     word-spacing: 4px;
     font-size: 20px;
     letter-spacing: 2px;
-    color: #fff;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -68,7 +77,6 @@
 .card-label {
     font-size: 10px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
     letter-spacing: 1px;
 }
 
@@ -77,134 +85,61 @@
     margin-top: 5px;
     font-size: 16px;
     line-height: 18px;
-    color: #fff;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
-.card:hover .lock-overlay {
-    opacity: 1;
-    transition: 0.3s linear;
+.btns-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    padding: 16px;
+    gap: 24px;
+    transform: scale(3);
 }
 
-.lock-overlay {
-    opacity: 0;
-    transition: 0.3s linear;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    height: 230px;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: rgba(0,0,0,0.3);
-}
-
-.lock-overlay .ring {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.3);
-}
-
-.lock-overlay .outer-most.ring {
-    height: 350px;
-    width: 350px;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.2);
-}
-
-.lock-overlay .outer.ring {
-    height: 240px;
-    width: 240px;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.2);
-}
-
-.lock-overlay .inner.ring {
-    height: 130px;
-    width: 130px;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.2);
-}
-
-.lock-overlay button {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,0.2);
-    border: 2px solid rgba(255,255,255,0);
-    outline:none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn {
+    width: 62px;
+    height: 62px;
+    position: relative;
+    border-radius: 18px;
+    padding: 2px;
+    box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.48), -4px -2px 16px #FFFFFF;
     cursor: pointer;
-    transition: 0.2s linear;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.lock-overlay button img{
-    height: 30px;
-    width: 30px;
-    transition: 0.2s linear;
-}
-
-.lock-overlay button:hover{
-    background-color: rgba(255,255,255,0.3);
-    border-color: rgba(255,255,255,0.4);
-    transition: 0.2s linear;
-}
-
-.password-input {
+.btn .inner-wrapper {
     width: 100%;
-    position: absolute;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
+    height: 100%;
+    border-radius: 16px;
+    transition: all .2s ease-in-out;
+    display: grid;
+    place-items: center;
 }
 
-.pin-overlay {
-    transition: 0.3s linear;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    height: 230px;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: rgba(0,0,0,0.6);
+.btn .inner-wrapper i {
+    user-select: none;
+    transition: all .2s ease-in-out;
+    font-size: 32px;
+    position: relative;
+    color: rgba(201, 215, 230, 0.8);
+    text-shadow: 2px 2px 2px #d6e1ef99, 0 0 0 #000, 2px 2px 2px #d6e1ef00;
 }
 
-.password-input input {
-  font-size: 20px;
-  height: 60px;
-  width: 60%;
-  background-color: rgba(0,0,0,0.4);
-  border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  text-align: center;
-  letter-spacing: 2px;
-  line-height: 40px;
+.btn.active .inner-wrapper {
+    box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #FFFFFF;
 }
 
-.password-input .img-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+.btn.active .inner-wrapper i {
+    text-shadow: 1px 1px 1px #d6e1ef99, 0 0 0 #000, 1px 1px 1px #d6e1ef00;
 }
 
-.password-input img {
-    height: 10px;
-}
-
-.decrypting-loader {
-  transform: scale(18,18);
-  position: absolute;
+.neo-text-box {
+    box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 12px;
+    border-radius: 7px;
 }
