@@ -43,7 +43,7 @@ class StatusCard extends React.Component {
           <div className="card-two-col top-header">
             <div className="bank-name">
               <img src={bankImg} />
-              <span>Lorem Ipsum</span><span>Bank</span>
+              <span>LOREM IPSUM</span>
             </div>
             <img className="card-logo" src={visaImg} />
           </div>
