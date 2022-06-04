@@ -7,19 +7,26 @@ class App extends Component {
         cardNumber: "000 090 1234 6258",
         validThru: "01/09",
         cvv: "076",
+        loading: true
     };
 
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({
+                loading: false
+            });
+        }, 700);
+    }
+
     render() {
-        const { cardNumber, validThru, cvv, decrypting, isValidPassword } = this.state;
-        return ( <
-            StatusCard isValidPassword = { isValidPassword }
-            decrypting = { decrypting }
+        const { loading, cardNumber, validThru, cvv } = this.state;
+        return ( <StatusCard
             type = "visa"
+            className={ loading ? "hidden" : "" }
             holderName = "HDesign In"
             cardNumber = { cardNumber }
             validThru = { validThru }
-            cvv = { cvv }
-            />
+            cvv = { cvv }/>
         );
     }
 }

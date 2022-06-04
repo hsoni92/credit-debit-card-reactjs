@@ -35,10 +35,10 @@ class StatusCard extends React.Component {
   }
 
   render() {
-    let { holderName, cardNumber, validThru, cvv } = this.props;
+    let { holderName, cardNumber, validThru, cvv, className } = this.props;
 
     return (
-      <div className="card">
+      <div className={`card ${className}`}>
         <div className="card-body">
           <div className="card-two-col top-header">
             <div className="bank-name">
