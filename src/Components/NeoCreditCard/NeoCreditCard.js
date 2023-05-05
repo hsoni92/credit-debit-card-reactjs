@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import visaImg from '../../images/visa.svg';
 import bankImg from '../../images/bank.svg';
-import './card.css';
+import './NeoCreditCard.css';
 
 class StatusCard extends React.Component {
   state = {
@@ -42,10 +42,10 @@ class StatusCard extends React.Component {
         <div className="card-body">
           <div className="card-two-col top-header">
             <div className="bank-name">
-              <img src={bankImg} />
+              <img alt="icon" src={bankImg} />
               <span>LOREM IPSUM</span>
             </div>
-            <img className="card-logo" src={visaImg} />
+            <img alt="logo" className="card-logo" src={visaImg} />
           </div>
           <p className="card-numer">{ this.maskCardNumber(cardNumber) }</p>
           <div>
