@@ -1,0 +1,85 @@
+.card {
+  .flex-row {
+    display: flex;
+    align-items: center;
+  }
+
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #121129;
+  font-family: "Inter",
+  sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings: "slnt";
+
+  .header {
+    font-weight: 500;
+    font-size: 12px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .task-label {
+      padding-top: 10px;
+      font-size: 15px;
+    }
+
+    .graph-container {
+      padding: 20px 50px;
+      flex-basis: 20%;
+
+      .CircularProgressbar-text {
+        font-weight: 600;
+      }
+    }
+
+    .info {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    .action-btn {
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      font-variation-settings: "slnt";
+      cursor: pointer;
+      height: 30px;
+      width: 100px;
+      background-image: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;
+      border-radius: 3px;
+      display: block;
+      border: unset;
+
+      &:hover {
+        background-position: right center;
+        /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+
+    }
+  }
+}

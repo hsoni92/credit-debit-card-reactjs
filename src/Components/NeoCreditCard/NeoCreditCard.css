@@ -1,11 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-* {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #323439;
-}
 
 .card {
     display: block;
