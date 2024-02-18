@@ -11,7 +11,7 @@ function TaskWidgetComponent() {
                 type="success"
                 percentage={45}
                 progressInfo="Deploying Containers 11/20"
-                duration="12h"
+                duration="12"
                 title="Training Model" />
         </div>
     </div>)
