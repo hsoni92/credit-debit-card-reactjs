@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { get } from 'lodash';
 import TaskWidget from './Components/TaskWidget/TaskWidget';
 import NeoCreditCard from './Components/NeoCreditCard/NeoCreditCard';
-import './App.css';
+import './App.less';
 
 function TaskWidgetComponent() {
     return (<div style={{ width: '800px', height: '400px', borderRadius: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#1C1A39' }}>
@@ -54,8 +54,17 @@ export default function App() {
             el: <CreditCardComponent />
         }
     ];
-    const indexEl = (<div>
-        {componentList.map(item => <div><a href={`?component=${item.id}`} style={{ display: 'block' }}><div>{item.name}</div></a></div>)}
+    const indexEl = (<div className="main-container">
+        {componentList.map((item, index) => <div className="grid-item">
+            <a href={`?component=${item.id}`}>
+            <div className="component-item">
+                <div className="name">
+                    <div className="number">{ index + 1 }</div>
+                    { item.name }
+                </div>
+            </div>
+            </a>
+        </div>)}
     </div>);
     componentList.push({
         id: '',

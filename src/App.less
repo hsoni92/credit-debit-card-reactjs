@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    background-color: #F1F3F6;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px !important;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.main-container {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 10px;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+    .grid-item {
+        a {
+            text-decoration: none;
+            font-family: "Inter";
+            font-weight: 500;
+        }
+        .component-item {
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #e1e5f2;
+            border: 1px solid #fff;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition-duration: 0.5s;
+            &:hover {
+                border: 1px solid #9eb3c2;
+            }
+            .name {
+                width: 70%;
+                padding: 2px;
+                display: flex;
+                align-items: center;
+                border-radius: 15px;
+                background-color: #9eb3c2;
+                color: #fff;
+                .number {
+                    background-color: #576490;
+                    text-align: center;
+                    line-height: 30px;
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    margin-right: 7px;
+                }
+            }
+        }
+    }
+}

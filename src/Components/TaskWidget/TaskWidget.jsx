@@ -7,8 +7,6 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './TaskWidget.less';
 
-// https://codesandbox.io/p/sandbox/vymm4oln6y?file=%2Findex.js%3A180%2C24-180%2C35
-
 const types = [
   'error',
   'warning',
@@ -48,7 +46,7 @@ export default function TaskWidget (props) {
     };
 
     return (
-      <div className="card" style={{ width: '200px', height: '350px' }}>
+      <div className="card-taskwidget" style={{ width: '200px', height: '350px' }}>
         <div className="header">
           {title}
         </div>

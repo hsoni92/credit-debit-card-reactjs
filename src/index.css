@@ -3,12 +3,6 @@
     outline: none;
 }
 
-#root {
-    height: 50vh;
-    display: flex;
-    align-items: flex-start;
-}
-
 .App {
     height: 100%;
     display: flex;
