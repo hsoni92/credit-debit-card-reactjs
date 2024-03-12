@@ -6,6 +6,8 @@
 	}
 }
 
+@color-loading: #06D6A0;
+
 .card-nc {
 	overflow: hidden;
 	position: relative;
@@ -33,8 +35,8 @@
             background-repeat: no-repeat;
             background-size: 50% 50%, 50% 50%;
             background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-            background-image: linear-gradient(#399953, #399953), linear-gradient(#fbb300, #fbb300), linear-gradient(#d53e33, #d53e33), linear-gradient(#377af5, #377af5);
-            animation: rotate 4s linear infinite;
+            background-image: linear-gradient(@color-loading, @color-loading), linear-gradient(#f1f3f6, #f1f3f6), linear-gradient(#06D6A0, #06D6A0), linear-gradient(#f1f3f6, #f1f3f6);
+            animation: rotate 2s linear infinite;
         }
     
         &::after {
