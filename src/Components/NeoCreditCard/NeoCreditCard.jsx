@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {
   IconBuildingBank
 } from '@tabler/icons-react';
-import { fetchDummyData, DP, CARD_TYPE } from './API.js';
+import { fetchDummyData, DP, CARD_TYPE, defaultDummyData } from './API.js';
 import visaImg from '../../images/visa.svg';
 import mcImg from '../../images/mc.svg';
 import './NeoCreditCard.less';
 
 export default function StatusCard (props) {
-  const [secureData, setCardSecureData] = useState({});
+  const [secureData, setCardSecureData] = useState(defaultDummyData);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ export default function StatusCard (props) {
   }, []);
 
   const getCardSecureData = async (secureCode = null) => {
+    setLoading(true);
     const data = await fetchDummyData(secureCode);
     setCardSecureData(data);
     setLoading(false);
@@ -72,16 +73,16 @@ export default function StatusCard (props) {
 
   const Card = (props) => {
     return (
-      <div className="card-nc">
+      <div className={`card-nc ${loading ? 'loading' : ''}`}>
         <div className="body">
           {props.children}
         </div>
       </div>);
   }
 
-  if (loading) {
-    return <></>;
-  }
+  // if (loading) {
+  //   return <></>;
+  // }
 
   let { holder, number, valid, cvv, encrypted, type } = secureData.data;
 

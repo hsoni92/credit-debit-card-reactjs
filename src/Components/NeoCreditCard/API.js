@@ -23,6 +23,17 @@ export const DP = {
     TYPE: CARD_TYPE.MC
 }
 
+export const defaultDummyData = {
+    data: {
+        holder: DP.HOLDER,
+        encrypted: true,
+        number: _maskLastOctet(DP.NUMBER),
+        cvv: _maskNumbers(DP.CVV),
+        valid: _maskNumbers(DP.VALID),
+        type: DP.TYPE
+    }
+};
+
 // Mock function to simulate API call
 export const fetchDummyData = (secureCode = null) => {
     const isValidCode = (secureCode === DP.SECURE_CODE);
