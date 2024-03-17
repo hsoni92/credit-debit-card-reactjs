@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
+  IconLock,
+  IconLockOpen,
   IconBuildingBank
 } from '@tabler/icons-react';
 import { fetchDummyData, DP, CARD_TYPE, defaultDummyData } from './API.js';
@@ -60,10 +62,10 @@ export default function StatusCard (props) {
           <div onClick={ () => props.encrypted
             ? getCardSecureData('0357')
             : getCardSecureData('0000') }
-            className={`btn ${props.encrypted ? '' : 'active'}`}
+            className={`btn ${props.encrypted ? 'active' : ''}`}
           >
             <div class="inner-wrapper">
-              <i class="material-icons-round">{props.encrypted ? 'lock' : 'lock_open'}</i>
+            { props.encrypted ? <IconLock size={35} /> : <IconLockOpen size={35} /> }
             </div>
           </div>
         </div>
